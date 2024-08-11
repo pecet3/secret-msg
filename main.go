@@ -4,24 +4,18 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/joho/godotenv"
-	"github.com/pecet3/secret-msg/controllers"
+	"github.com/pecet3/secret-msg/handlers"
 	"github.com/pecet3/secret-msg/messages"
 )
-
-func loadEnv() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatalf("Error loading .env file: %v", err)
-	}
-	log.Println("Loaded .env")
-}
 
 func main() {
 	ms := messages.NewMsgServices()
 	mux := http.NewServeMux()
 
-	controllers.Run(mux, ms)
+	handlers.Run(mux, ms)
+
+	fs := http.FileServer(http.Dir("./static"))
+	mux.Handle("/", fs)
 
 	address := "127.0.0.1:8010"
 	log.Printf("Starting a server [%s]", address)
@@ -29,7 +23,5 @@ func main() {
 		Addr:    address,
 		Handler: mux,
 	}
-
 	log.Fatalln(server.ListenAndServe())
-
 }
