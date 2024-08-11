@@ -10,13 +10,14 @@ import (
 )
 
 type Message struct {
-	Content   string
-	CreatedAt time.Time
-	ExpiresAt time.Time
-	Token     uuid.UUID
+	Content     string
+	IsEncrypted bool
+	CreatedAt   time.Time
+	ExpiresAt   time.Time
+	Token       string
 }
 
-type MessagesMap map[uuid.UUID]*Message
+type MessagesMap map[string]*Message
 
 type MessagesService struct {
 	MessagesMap MessagesMap
@@ -29,11 +30,11 @@ func NewMsgServices() *MessagesService {
 	}
 }
 
-func (ms *MessagesService) AddMessage(content string) uuid.UUID {
+func (ms *MessagesService) AddMessage(content string) string {
 	ms.mMux.Lock()
 	defer ms.mMux.Unlock()
 
-	token := uuid.New()
+	token := uuid.New().String()
 	now := time.Now()
 	expiresAt := time.Now().Add(1 * time.Minute)
 	msg := &Message{
@@ -44,11 +45,21 @@ func (ms *MessagesService) AddMessage(content string) uuid.UUID {
 	}
 
 	ms.MessagesMap[token] = msg
-
+	log.Println(ms.MessagesMap)
 	return token
 }
 
-func (ms *MessagesService) DeleteMessage(token uuid.UUID) error {
+func (ms *MessagesService) GetMessage(token string) (*Message, error) {
+	ms.mMux.Lock()
+	defer ms.mMux.Unlock()
+	msg, exists := ms.MessagesMap[token]
+	if !exists {
+		return nil, errors.New("message doesn't exists")
+	}
+	return msg, nil
+}
+
+func (ms *MessagesService) DeleteMessage(token string) error {
 	ms.mMux.Lock()
 	defer ms.mMux.Unlock()
 

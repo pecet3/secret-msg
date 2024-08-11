@@ -6,15 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="referrer" content="no-referrer">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Secret Msg</title>
 </head>
 
-<body class="flex flex-col items-center justify-center bg-gray-300">
-    <nav class="text-white fixed top-0 p-2 bg-gray-600 font-mono w-full">Secret MSG</nav>
+<body class="flex flex-col items-center justify-center bg-gray-800">
+    <nav class="text-white fixed top-0 p-2 bg-blue-600 font-mono w-full font-bold">Secret MSG</nav>
     <div class="my-12 mx-auto justify-center max-w-2xl">
-        <form name="msgForm" class="">
-            <textarea class="resize-none " placeholder="Write a message" rows="4"></textarea>
+        <form id="msgForm" class="flex flex-col">
+            <textarea name="message" class="resize-none " placeholder="Write a message" rows="4"></textarea>
             <input type="submit" value="Send" class="hover:cursor-pointer duration-300
 					 bg-purple-200 rounded-lg hover:rounded-xl 
 					 border border-black text-2xl font-mono font-bold
