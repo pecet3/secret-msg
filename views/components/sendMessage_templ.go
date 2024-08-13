@@ -26,7 +26,7 @@ func SendMessage() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form id=\"msgForm\" class=\"flex flex-col\"><textarea name=\"message\" class=\"resize-none border border-black w-full max-w-2xl\" placeholder=\"Write a message\" rows=\"4\"></textarea> <input type=\"submit\" value=\"Send\" class=\"hover:cursor-pointer duration-300\n\t\t\t\t\t bg-purple-200 rounded-lg hover:rounded-xl \n\t\t\t\t\t border border-black text-2xl font-mono font-bold\n\t\t\t\t\t px-1 py-0.5\n\t\t\t\t\t \"></form><div class=\"border border-black\"><p id=\"linkHolder\"></p></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form id=\"msgForm\" class=\"flex flex-col w-full max-w-2xl m-auto\"><textarea name=\"message\" class=\"resize-none border border-black  rounded-lg\" placeholder=\"Write a message\" rows=\"4\"></textarea> <input type=\"submit\" value=\"Send\" class=\"hover:cursor-pointer duration-300\n\t\t\t\t\t bg-purple-200 rounded-lg hover:rounded-xl \n\t\t\t\t\t border border-black text-2xl font-mono font-bold\n\t\t\t\t\t px-1 py-0.5\n\t\t\t\t\t \"></form><div class=\"border border-black\"><p id=\"linkHolder\"></p></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
